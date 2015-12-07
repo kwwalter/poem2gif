@@ -13,3 +13,33 @@
  *= require_tree .
  *= require_self
  */
+
+* {
+  margin: 0
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+#poem-form {
+  margin: 0 auto;
+}
+
+#poem-title {
+  width: 40%;
+}
+
+#poem-body {
+  height: 25rem;
+  width: 80%;
+  text-align: left;
+  vertical-align: top;
+  resize: none;
+}
+
+form > input, form > textarea {
+  margin-bottom: 1rem;
+}

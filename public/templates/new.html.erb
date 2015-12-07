@@ -1,0 +1,6 @@
+<h2>Paste your poem in the field below (and give it a title!)</h2>
+<form id="poem-form" ng-submit="poemCtrl.convert()">
+  <input id="poem-title" type="text" placeholder="title" ng-model="poemCtrl.title">
+  <textarea id="poem-body" placeholder="body" ng-model="poemCtrl.body"></textarea><br>
+  <input type="submit" value="submit">
+</form>
