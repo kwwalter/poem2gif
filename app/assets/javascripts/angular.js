@@ -30,14 +30,20 @@ app.service('poemService', ['$http', function($http){
 
   this.convert = function(poem) {
     var bodystring = poem.body;
-    // var linesArray = bodystring.match(/[^\r]/gm);
-    // console.log("linesArray is: ", linesArray);
-    var linesArray = bodystring.match(/[^\s.!?]+[^.!?\r\n]+[.!?]*/g);
+
+    // replace all the periods..
+    var noPeriods = bodystring.replace(/\./g, " ");
+
+    // break into lines..
+    var linesArray = noPeriods.match(/[^\s.]+[^.\r\n]+[.]*/g);
     // console.log("linesArray is: ", linesArray);
 
     for (var i = 0; i < linesArray.length; i++) {
+      // remove all the punctuation first..
+      linesArray[i] = linesArray[i].replace(/[.,-\/#!$%\^&\*;:{}=\-_`~()&]/g,"");
+
       // split the lines into words
-      linesArray[i] = linesArray[i].split(/[ ,?.-]+/);
+      linesArray[i] = linesArray[i].split(" ");
     };
 
     console.log("linesArray is now: ", linesArray);
