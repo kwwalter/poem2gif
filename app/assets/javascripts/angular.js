@@ -8,7 +8,7 @@ app.controller('MainController', ['$http', '$scope', function($http, $scope){
 
 }]);
 
-app.controller('PoemController', ['$http', '$scope', 'poemService', function($http, $scope, poemService){
+app.controller('PoemController', ['$http', '$scope', 'poemService', '$location', function($http, $scope, poemService, $location){
 
   var controller = this;
 
@@ -85,16 +85,37 @@ app.controller('PoemController', ['$http', '$scope', 'poemService', function($ht
 
     console.log("at the end of convert(), linesArray is now: ", linesArray);
 
-    // store the updated array in the controller
-    controller.poemArray = linesArray;
+    // store the updated array in the service
+    poemService.setPoemArray(linesArray);
 
     // clear the fields:
     controller.title = "";
     controller.body = "";
+
+    // redirect
+    $location.path('/results');
   }; // end of convert()
 }]);
 
+app.controller('ResultsController', ['$http', '$scope', 'poemService', '$location', function($http, $scope, poemService, $location){
+
+  var controller = this;
+
+  controller.poemArray = poemService.getPoemArray();
+
+  console.log("in ResultsController, poemArray is: ", controller.poemArray);
+}]);
+
 app.service('poemService', ['$http', function($http){
+  var serviceThis = this;
+
+  this.setPoemArray = function(poemArray) {
+    serviceThis.poemArray = poemArray;
+  };
+
+  this.getPoemArray = function() {
+    return serviceThis.poemArray;
+  };
 
   // this.convert = function(poem) {
   //   var bodystring = poem.body;
@@ -178,8 +199,8 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   }).
   when('/results', {
     templateUrl: 'templates/results.html.erb',
-    controller: 'PoemController',
-    controllerAs: 'poemCtrl'
+    controller: 'ResultsController',
+    controllerAs: 'resultsCtrl'
   }).
   otherwise({
     redirectTo: '/'
