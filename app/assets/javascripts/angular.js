@@ -85,6 +85,9 @@ app.controller('PoemController', ['$http', '$scope', 'poemService', function($ht
 
     console.log("at the end of convert(), linesArray is now: ", linesArray);
 
+    // store the updated array in the controller
+    controller.poemArray = linesArray;
+
     // clear the fields:
     controller.title = "";
     controller.body = "";
@@ -170,6 +173,11 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   }).
   when('/new', {
     templateUrl: 'templates/new.html.erb',
+    controller: 'PoemController',
+    controllerAs: 'poemCtrl'
+  }).
+  when('/results', {
+    templateUrl: 'templates/results.html.erb',
     controller: 'PoemController',
     controllerAs: 'poemCtrl'
   }).
