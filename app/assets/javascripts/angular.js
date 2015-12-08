@@ -4,8 +4,6 @@ app.controller('MainController', ['$http', '$scope', function($http, $scope){
 
   var controller = this;
 
-
-
 }]);
 
 app.controller('PoemController', ['$http', '$scope', 'poemService', '$location', function($http, $scope, poemService, $location){
@@ -17,6 +15,9 @@ app.controller('PoemController', ['$http', '$scope', 'poemService', '$location',
       title: controller.title,
       body: controller.body
     };
+
+    poemService.setTitle(poem.title);
+
     // controller.poemArray = poemService.convert(poem);
 
     // poemService.convert(poem);
@@ -65,8 +66,8 @@ app.controller('PoemController', ['$http', '$scope', 'poemService', '$location',
 
             // conditional to ensure that data.data.data.length > 0
             if (data.data.data.length > 0) {
-              // generate a random index value based on data array length
-              var random = Math.floor(Math.random() * data.data.data.length) + 1;
+              // generate a random index value based on data array length.. removing the +1 to avoid the id of undefined problem
+              var random = Math.floor(Math.random() * data.data.data.length);
 
               // concat the gifURL using the random index
               var gifURL = 'https://media.giphy.com/media/' + data.data.data[random].id + '/giphy.gif';
@@ -102,6 +103,7 @@ app.controller('ResultsController', ['$http', '$scope', 'poemService', '$locatio
   var controller = this;
 
   controller.poemArray = poemService.getPoemArray();
+  controller.title = poemService.getTitle();
 
   console.log("in ResultsController, poemArray is: ", controller.poemArray);
 }]);
@@ -116,6 +118,14 @@ app.service('poemService', ['$http', function($http){
   this.getPoemArray = function() {
     return serviceThis.poemArray;
   };
+
+  this.setTitle = function(title) {
+    serviceThis.title = title;
+  }
+
+  this.getTitle = function() {
+    return serviceThis.title;
+  }
 
   // this.convert = function(poem) {
   //   var bodystring = poem.body;

@@ -1,2 +1,13 @@
 <h2>Results</h2>
-{{resultsCtrl.poemArray}}
+<h3>{{resultsCtrl.title}}</h3>
+<div id="poem-display" ng-repeat="lines in resultsCtrl.poemArray">
+  <h4>Line {{$index + 1}}</h4>
+  <div id="line-display">
+    <div id="word-display" ng-repeat="word in lines">
+      <img ng-show="word.linkToGIF" src="{{word.linkToGIF}}" alt="{{word.word}}">
+      <div ng-show="!word.linkToGIF">
+        {{word.word}}
+      </div>
+    </div>
+  </div>
+</div>
