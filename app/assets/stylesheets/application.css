@@ -47,17 +47,21 @@ form > input, form > textarea {
 #poem-display {
   width: 80%;
   border: 1px solid black;
-  /*margin: 0.5rem auto;*/
-  /*display: block;*/
+  margin: 0.5rem auto;
+  display: block;
 }
 
 #line-display {
-  display: block;
+  display: flex;
   margin-bottom: 1rem;
 }
 
+#word-display {
+  position: relative;
+}
+
 #word-display > img, #word-display > div {
-  /*float: left;*/
-  display: inline-block;
+  float: left;
+  display: inline;
   max-width: 15rem;
 }
