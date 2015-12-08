@@ -62,25 +62,30 @@ app.service('poemService', ['$http', function($http){
 
         // if it's not a blank entry, make the API call
         if (linesArray[j][k]) {
-          $http.get('http://api.giphy.com/v1/gifs/search?q=kitty&api_key=dc6zaTOxFJmzC ')
+          $http.get('http://api.giphy.com/v1/gifs/search?q=' + linesArray[j][k] + '&api_key=dc6zaTOxFJmzC ')
           .then(function(data){
-            // console.log("data from API call is: ", data);
+            console.log('data from API call #j(' + j + ') #k(' + k + ') is: ', data);
 
-            // generate a random index value based on data array length
-            var random = Math.floor(Math.random() * data.data.data.length) + 1;
+            // conditional to ensure that data.data.data.length > 0
+            if (data.data.data.length > 0) {
+              // generate a random index value based on data array length
+              var random = Math.floor(Math.random() * data.data.data.length) + 1;
 
-            // concat the gifURL using the random index
-            var gifURL = 'https://media.giphy.com/media/' + data.data.data[random].id + '/giphy.gif';
+              // concat the gifURL using the random index
+              var gifURL = 'https://media.giphy.com/media/' + data.data.data[random].id + '/giphy.gif';
 
-            // if the URL is valid, assign the value.
-            if (gifURL) {
-              linesArray[j][k].linkToGIF = gifURL;
+              // if the URL is valid, assign the value.
+              if (gifURL) {
+                linesArray[j][k].linkToGIF = gifURL;
+              }
             }
           }, function(error){
             console.log("error during API call: ", error);
           });
-        }
-      }
+        } // end of if (linesArray[j][k])
+        console.log("j is now: ", j);
+        console.log("k is now: ", k);
+      } // end of inner for loop
     } // end of outer for loop
 
     console.log("at the end of convert(), linesArray is now: ", linesArray);
