@@ -6,11 +6,6 @@ app.controller('MainController', ['$http', '$scope', 'poemService', '$location',
 
   // load up all the current poems on controller instantiation
   controller.poems = poemService.getAll();
-  // console.log("controller.poems is now: ", controller.poems);
-
-  this.storeOnePoem = function(poemID) {
-    poemService.storeOnePoem(poemID);
-  }
 }]);
 
 app.controller('ShowController', ['$http', '$scope', 'poemService', '$location', '$routeParams', function($http, $scope, poemService, $location, $routeParams){
@@ -30,6 +25,7 @@ app.controller('ShowController', ['$http', '$scope', 'poemService', '$location',
     });
   };
 
+  // run on controller instantiation
   this.getOnePoem();
 }]);
 
@@ -158,19 +154,6 @@ app.service('poemService', ['$http', '$routeParams', function($http, $routeParam
     });
 
     return serviceThis.poems;
-  };
-
-  this.storeOnePoem = function(poemID) {
-    $http.get('/poems/' + poemID).then(function(data){
-      console.log("data from getOnePoem is: ", data);
-      serviceThis.onePoem = data.data;
-    }, function(error){
-      console.log("there was an error: ", error);
-    });
-  };
-
-  this.getOnePoem = function(){
-    return serviceThis.onePoem;
   };
 
   this.setPoemArray = function(poemArray) {
