@@ -1,18 +1,12 @@
 var app = angular.module('poem2GIF', ['ngRoute']);
 
-app.controller('MainController', ['$http', '$scope', function($http, $scope){
+app.controller('MainController', ['$http', '$scope', 'poemService', '$location', function($http, $scope, poemService, $location){
 
   var controller = this;
 
-  this.getAll = function(){
-    $http.get('/poems').then(function(data){
-      console.log("data from getAll call is: ", data);
-      controller.poems = data.data;
-      console.log("controller.poems is now: ", controller.poems);
-    }, function(error){
-      console.log("there was an error: ", error);
-    });
-  };
+  // load up all the current poems on controller instantiation
+  controller.poems = poemService.getAll();
+  console.log("controller.poems is now: ", controller.poems);
 
 }]);
 
@@ -131,6 +125,17 @@ app.controller('ResultsController', ['$http', '$scope', 'poemService', '$locatio
 
 app.service('poemService', ['$http', function($http){
   var serviceThis = this;
+
+  this.getAll = function() {
+    $http.get('/poems').then(function(data){
+      console.log("data from getAll call is: ", data);
+      serviceThis.poems = data.data;
+    }, function(error){
+      console.log("there was an error: ", error);
+    });
+
+    return serviceThis.poems;
+  };
 
   this.setPoemArray = function(poemArray) {
     serviceThis.poemArray = poemArray;
