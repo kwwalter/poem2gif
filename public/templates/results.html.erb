@@ -5,7 +5,10 @@
     <h4>Line {{$index + 1}}</h4>
     <div id="line-display">
       <div id="word-display" ng-repeat="word in lines track by $index">
-        <img class="gif" ng-show="word.linkToGIF" src="{{word.linkToGIF}}" alt="{{word.word}}">
+        <div class="img-wrapper" ng-show="word.linkToGIF">
+          <img class="gif" src="{{word.linkToGIF}}" alt="{{word.word}}">
+          <p class="hover-text">{{word.word}}</p>
+        </div>
         <div class="no-gif" ng-show="!word.linkToGIF">
           <p>{{word.word}}</p>
         </div>
@@ -13,3 +16,6 @@
     </div>
   </div>
 </div>
+<h3>Want to save this to the archive so other people can see it?</h3>
+<button>You bet!</button>
+<button>No way.</button>
