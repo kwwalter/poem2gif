@@ -15,7 +15,7 @@
  */
 
 * {
-  margin: 0
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
@@ -49,6 +49,11 @@ form > input, form > textarea {
   border: 1px solid black;
   margin: 0.5rem auto;
   display: block;
+  /*overflow: auto;*/
+}
+
+#poem-display > div {
+  margin: 0.5rem;
 }
 
 #line-display {
@@ -58,10 +63,24 @@ form > input, form > textarea {
 
 #word-display {
   position: relative;
+  width: 100%:
 }
 
 #word-display > img, #word-display > div {
-  float: left;
-  display: inline;
-  max-width: 15rem;
+  /*float: left;*/
+  display: inline-block;
+  margin-left: 0.5rem;
+  max-width: 10rem;
+}
+
+.no-gif {
+  width: 12rem;
+  height: 9rem;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.no-gif > p {
+  padding-top: 2.5rem;
+  font-size: 3rem;
 }
