@@ -134,6 +134,17 @@ app.controller('ResultsController', ['$http', '$scope', 'poemService', '$locatio
 
   this.saveGIFPoem = function(poemArray){
     console.log("poemArray in saveGIFPoem is: ", poemArray);
+
+    $http.post('/signup', {
+      title: controller.title || "untitled " + Date.now,
+      author: controller.author || "anonymous",
+      poem: poemArray
+    }).then(function(data){
+      console.log("success! data from saveGIFPoem() is: ", data);
+      $location.path('/all')
+    }, function(error){
+      console.log("there was an error: ", error);
+    });
   };
 
   this.deleteForever = function() {
