@@ -7,14 +7,30 @@ app.controller('MainController', ['$http', '$scope', 'poemService', '$location',
   // load up all the current poems on controller instantiation
   controller.poems = poemService.getAll();
   // console.log("controller.poems is now: ", controller.poems);
+
+  this.storeOnePoem = function(poemID) {
+    poemService.storeOnePoem(poemID);
+  }
 }]);
 
-app.controller('ShowController', ['$http', '$scope', 'poemService', '$location', function($http, $scope, poemService, $location){
+app.controller('ShowController', ['$http', '$scope', 'poemService', '$location', '$routeParams', function($http, $scope, poemService, $location, $routeParams){
 
   var controller = this;
 
   // load the one poem
-  controller.onePoem = poemService.getOnePoem();
+  this.getOnePoem = function(){
+    // controller.onePoem = poemService.getOnePoem();
+    // console.log("controller.onePoem is now: ", controller.onePoem);
+    $http.get('/poems/' + $routeParams.id).then(function(data){
+      console.log("data from getOnePoem is: ", data);
+      controller.onePoem = data.data;
+      console.log("controller.onePoem is now: ", controller.onePoem);
+    }, function(error){
+      console.log("there was an error: ", error);
+    });
+  };
+
+  this.getOnePoem();
 }]);
 
 app.controller('PoemController', ['$http', '$scope', 'poemService', '$location', function($http, $scope, poemService, $location){
@@ -144,14 +160,16 @@ app.service('poemService', ['$http', '$routeParams', function($http, $routeParam
     return serviceThis.poems;
   };
 
-  this.getOnePoem = function(){
-    $http.get('/poems/' + $routeParams.id).then(function(data){
-      // console.log("data from getOnePoem is: ", data);
+  this.storeOnePoem = function(poemID) {
+    $http.get('/poems/' + poemID).then(function(data){
+      console.log("data from getOnePoem is: ", data);
       serviceThis.onePoem = data.data;
     }, function(error){
       console.log("there was an error: ", error);
     });
+  };
 
+  this.getOnePoem = function(){
     return serviceThis.onePoem;
   };
 
