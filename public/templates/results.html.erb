@@ -1,5 +1,6 @@
 <h2>Results</h2>
-<h3>{{resultsCtrl.title}}</h3>
+<h3>{{resultsCtrl.poemData.title}}</h3>
+<h4>{{resultsCtrl.poemData.author}}</h4>
 <div id="poem-display">
   <div ng-repeat="lines in resultsCtrl.poemArray track by $index">
     <h4>Line {{$index + 1}}</h4>
@@ -17,5 +18,5 @@
   </div>
 </div>
 <h3>Want to save this to the archive so other people can see it?</h3>
-<button>You bet!</button>
-<button>No way.</button>
+<button ng-click="resultsCtrl.saveGIFPoem(resultsCtrl.poemArray)">You bet!</button>
+<button ng-click="resultsCtrl.deleteForever()">No way.</button>

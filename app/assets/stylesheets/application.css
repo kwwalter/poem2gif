@@ -28,7 +28,7 @@ body {
   margin: 0 auto;
 }
 
-#poem-title {
+#poem-title, #poem-author {
   width: 40%;
 }
 

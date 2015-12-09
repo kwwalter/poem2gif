@@ -13,10 +13,11 @@ app.controller('PoemController', ['$http', '$scope', 'poemService', '$location',
   this.convert = function(){
     var poem = {
       title: controller.title,
+      author: controller.author,
       body: controller.body
     };
 
-    poemService.setTitle(poem.title);
+    poemService.setPoemData(poem);
 
     // controller.poemArray = poemService.convert(poem);
 
@@ -51,7 +52,7 @@ app.controller('PoemController', ['$http', '$scope', 'poemService', '$location',
         };
       }
     }
-    console.log("after the nested for loops, the linesArray is: ", linesArray);
+    // console.log("after the nested for loops, the linesArray is: ", linesArray);
 
     //here, make the API calls (using the public beta key), by iterating through the array.. using foreach instead
     linesArray.forEach(function(subarray){
@@ -62,7 +63,7 @@ app.controller('PoemController', ['$http', '$scope', 'poemService', '$location',
         if (wordEntry) {
           $http.get('http://api.giphy.com/v1/gifs/search?q=' + wordEntry.word + '&limit=100&api_key=dc6zaTOxFJmzC ')
           .then(function(data){
-            console.log('data from API call when the word is ' + wordEntry.word + ' is: ', data);
+            // console.log('data from API call when the word is ' + wordEntry.word + ' is: ', data);
 
             // conditional to ensure that data.data.data.length > 0
             if (data.data.data.length > 0) {
@@ -84,13 +85,14 @@ app.controller('PoemController', ['$http', '$scope', 'poemService', '$location',
       }); // end of inner forEach
     }); // end of outer forEach
 
-    console.log("at the end of convert(), linesArray is now: ", linesArray);
+    // console.log("at the end of convert(), linesArray is now: ", linesArray);
 
     // store the updated array in the service
     poemService.setPoemArray(linesArray);
 
     // clear the fields:
     controller.title = "";
+    controller.author = "";
     controller.body = "";
 
     // redirect
@@ -103,9 +105,18 @@ app.controller('ResultsController', ['$http', '$scope', 'poemService', '$locatio
   var controller = this;
 
   controller.poemArray = poemService.getPoemArray();
-  controller.title = poemService.getTitle();
+  controller.poemData = poemService.getPoemData();
 
   console.log("in ResultsController, poemArray is: ", controller.poemArray);
+
+  this.saveGIFPoem = function(poemArray){
+    console.log("poemArray in saveGIFPoem is: ", poemArray);
+  };
+
+  this.deleteForever = function() {
+    poemService.clearPoemData();
+    $location.path('/');
+  }
 }]);
 
 app.service('poemService', ['$http', function($http){
@@ -119,13 +130,21 @@ app.service('poemService', ['$http', function($http){
     return serviceThis.poemArray;
   };
 
-  this.setTitle = function(title) {
-    serviceThis.title = title;
-  }
+  this.setPoemData = function(poem) {
+    serviceThis.poemData = {
+      title: poem.title,
+      author: poem.author
+    };
+  };
 
-  this.getTitle = function() {
-    return serviceThis.title;
-  }
+  this.getPoemData = function() {
+    return serviceThis.poemData;
+  };
+
+  this.clearPoemData = function() {
+    serviceThis.poemArray = null;
+    serviceThis.poemData = null;
+  };
 
   // this.convert = function(poem) {
   //   var bodystring = poem.body;
