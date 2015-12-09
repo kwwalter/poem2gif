@@ -1,10 +1,10 @@
 <h2>Results</h2>
 <h3>{{resultsCtrl.title}}</h3>
 <div id="poem-display">
-  <div ng-repeat="lines in resultsCtrl.poemArray">
+  <div ng-repeat="lines in resultsCtrl.poemArray track by $index">
     <h4>Line {{$index + 1}}</h4>
     <div id="line-display">
-      <div id="word-display" ng-repeat="word in lines">
+      <div id="word-display" ng-repeat="word in lines track by $index">
         <img class="gif" ng-show="word.linkToGIF" src="{{word.linkToGIF}}" alt="{{word.word}}">
         <div class="no-gif" ng-show="!word.linkToGIF">
           <p>{{word.word}}</p>

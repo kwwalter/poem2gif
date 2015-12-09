@@ -25,7 +25,7 @@ app.controller('PoemController', ['$http', '$scope', 'poemService', '$location',
     var bodystring = poem.body;
 
     // replace all the periods..
-    var noPeriods = bodystring.replace(/\./g, " ");
+    var noPeriods = bodystring.replace(/\./g, "");
 
     // break into lines..
     var linesArray = noPeriods.match(/[^\s.]+[^.\r\n]+[.]*/g);
@@ -60,7 +60,7 @@ app.controller('PoemController', ['$http', '$scope', 'poemService', '$location',
 
         // if it's not a blank entry, make the API call
         if (wordEntry) {
-          $http.get('http://api.giphy.com/v1/gifs/search?q=' + wordEntry.word + '&api_key=dc6zaTOxFJmzC ')
+          $http.get('http://api.giphy.com/v1/gifs/search?q=' + wordEntry.word + '&limit=100&api_key=dc6zaTOxFJmzC ')
           .then(function(data){
             console.log('data from API call when the word is ' + wordEntry.word + ' is: ', data);
 
