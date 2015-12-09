@@ -1,7 +1,6 @@
-<h1>here are all the poems</h1>
-<ul>List
+<h1>All Saved GIFPoems/PoemGIFs/GIFOEMS</h1>
+<ul>
   <li ng-repeat="poem in mainCtrl.poems">
-    <a>{{poem.title}}, by {{poem.author}}</a>
+    <a ng-click="mainCtrl.getOnePoem()" href="/poem/{{poem.id}}">{{poem.title}}, by {{poem.author}}</a>
   </li>
 </ul>
-{{mainCtrl.poems}}

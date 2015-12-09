@@ -6,8 +6,15 @@ app.controller('MainController', ['$http', '$scope', 'poemService', '$location',
 
   // load up all the current poems on controller instantiation
   controller.poems = poemService.getAll();
-  console.log("controller.poems is now: ", controller.poems);
+  // console.log("controller.poems is now: ", controller.poems);
+}]);
 
+app.controller('ShowController', ['$http', '$scope', 'poemService', '$location', function($http, $scope, poemService, $location){
+
+  var controller = this;
+
+  // load the one poem
+  controller.onePoem = poemService.getOnePoem();
 }]);
 
 app.controller('PoemController', ['$http', '$scope', 'poemService', '$location', function($http, $scope, poemService, $location){
@@ -120,21 +127,32 @@ app.controller('ResultsController', ['$http', '$scope', 'poemService', '$locatio
   this.deleteForever = function() {
     poemService.clearPoemData();
     $location.path('/');
-  }
+  };
 }]);
 
-app.service('poemService', ['$http', function($http){
+app.service('poemService', ['$http', '$routeParams', function($http, $routeParams){
   var serviceThis = this;
 
   this.getAll = function() {
     $http.get('/poems').then(function(data){
-      console.log("data from getAll call is: ", data);
+      // console.log("data from getAll call is: ", data);
       serviceThis.poems = data.data;
     }, function(error){
       console.log("there was an error: ", error);
     });
 
     return serviceThis.poems;
+  };
+
+  this.getOnePoem = function(){
+    $http.get('/poems/' + $routeParams.id).then(function(data){
+      // console.log("data from getOnePoem is: ", data);
+      serviceThis.onePoem = data.data;
+    }, function(error){
+      console.log("there was an error: ", error);
+    });
+
+    return serviceThis.onePoem;
   };
 
   this.setPoemArray = function(poemArray) {
@@ -240,6 +258,11 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     templateUrl: 'templates/all.html.erb',
     controller: 'MainController',
     controllerAs: 'mainCtrl'
+  }).
+  when('/poem/:id', {
+    templateUrl: 'templates/show-one.html.erb',
+    controller: 'ShowController',
+    controllerAs: 'showCtrl'
   }).
   when('/new', {
     templateUrl: 'templates/new.html.erb',
