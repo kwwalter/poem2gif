@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :poems
   root 'application#angular'
+
+  resources :poems, defaults: { format: :json }
 
   # root 'welcome#index'
 

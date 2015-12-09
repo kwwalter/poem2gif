@@ -4,6 +4,15 @@ app.controller('MainController', ['$http', '$scope', function($http, $scope){
 
   var controller = this;
 
+  this.getAll = function(){
+    $http.get('/poems').then(function(data){
+      console.log("data from getAll call is: ", data);
+      // controller.poems = data.data.presents;
+    }, function(error){
+      console.log("there was an error: ", error);
+    });
+  };
+
 }]);
 
 app.controller('PoemController', ['$http', '$scope', 'poemService', '$location', function($http, $scope, poemService, $location){
@@ -218,6 +227,11 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   $routeProvider.
   when('/', {
     templateUrl: 'templates/welcome.html.erb',
+    controller: 'MainController',
+    controllerAs: 'mainCtrl'
+  }).
+  when('/all', {
+    templateUrl: 'templates/all.html.erb',
     controller: 'MainController',
     controllerAs: 'mainCtrl'
   }).
