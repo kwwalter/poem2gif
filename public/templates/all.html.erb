@@ -1,1 +1,7 @@
 <h1>here are all the poems</h1>
+<ul>List
+  <li ng-repeat="poem in mainCtrl.poems">
+    <a>{{poem.title}}, by {{poem.author}}</a>
+  </li>
+</ul>
+{{mainCtrl.poems}}

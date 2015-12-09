@@ -7,7 +7,8 @@ app.controller('MainController', ['$http', '$scope', function($http, $scope){
   this.getAll = function(){
     $http.get('/poems').then(function(data){
       console.log("data from getAll call is: ", data);
-      // controller.poems = data.data.presents;
+      controller.poems = data.data;
+      console.log("controller.poems is now: ", controller.poems);
     }, function(error){
       console.log("there was an error: ", error);
     });
