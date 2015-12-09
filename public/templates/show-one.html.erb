@@ -5,6 +5,7 @@
     <h4>Line {{$index + 1}}</h4>
     <div id="line-display">
       <div id="word-display" ng-repeat="word in lines track by $index">
+        Link To GIF: {{linkToGIF}}
         <div class="img-wrapper" ng-show="word.linkToGIF">
           <img class="gif" src="{{word.linkToGIF}}" alt="{{word.word}}">
           <p class="hover-text">{{word.word}}</p>

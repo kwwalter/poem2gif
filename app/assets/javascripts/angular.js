@@ -48,8 +48,8 @@ app.controller('PoemController', ['$http', '$scope', 'poemService', '$location',
 
     var bodystring = poem.body;
 
-    // replace all the periods..
-    var noPeriods = bodystring.replace(/\./g, "");
+    // replace all the periods, carriage returns, and line breaks..
+    var noPeriods = bodystring.replace(/\.\r\n/g, "");
 
     // break into lines..
     var linesArray = noPeriods.match(/[^\s.]+[^.\r\n]+[.]*/g);
@@ -127,16 +127,23 @@ app.controller('ResultsController', ['$http', '$scope', 'poemService', '$locatio
 
   var controller = this;
 
+  // get the authenticity_token for saving purposes
+  var authenticity_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
   controller.poemArray = poemService.getPoemArray();
   controller.poemData = poemService.getPoemData();
 
   console.log("in ResultsController, poemArray is: ", controller.poemArray);
 
+  // NOTE: might have to remove any blank entries (usually from periods at end of line) otherwise there'll be an error because multidimensional arrays must have subarrays of equal length
+
   this.saveGIFPoem = function(poemArray){
     console.log("poemArray in saveGIFPoem is: ", poemArray);
 
-    $http.post('/signup', {
-      title: controller.title || "untitled " + Date.now,
+    $http.post('/poems', {
+      //include authenticity_token
+      authenticity_token: authenticity_token,
+      title: controller.title || "untitled",
       author: controller.author || "anonymous",
       poem: poemArray
     }).then(function(data){
