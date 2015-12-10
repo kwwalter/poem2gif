@@ -4,8 +4,34 @@ app.controller('MainController', ['$http', '$scope', 'poemService', '$location',
 
   var controller = this;
 
+  this.redirect = function(whereTo) {
+    $location.path('/' + whereTo);
+  };
+
   // load up all the current poems on controller instantiation
   controller.poems = poemService.getAll();
+
+  // get a welcome page GIF..
+  $http.get('http://api.giphy.com/v1/gifs/search?q=writing&limit=100&api_key=dc6zaTOxFJmzC ')
+  .then(function(data){
+    console.log('data from intro API call is: ', data);
+
+    // conditional to ensure that data.data.data.length > 0
+    if (data.data.data.length > 0) {
+      // generate a random index value based on data array length.. removing the +1 to avoid the id of undefined problem
+      var random = Math.floor(Math.random() * data.data.data.length);
+
+      // concat the gifURL using the random index
+      var gifURL = 'https://media.giphy.com/media/' + data.data.data[random].id + '/giphy.gif';
+
+      // if the URL is valid, assign the value.
+      if (gifURL) {
+        controller.introGIFUrl = gifURL; 
+      }
+    }
+  }, function(error){
+    console.log("error during API call: ", error);
+  });
 }]);
 
 app.controller('ShowController', ['$http', '$scope', 'poemService', '$location', '$routeParams', function($http, $scope, poemService, $location, $routeParams){

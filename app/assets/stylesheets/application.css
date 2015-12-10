@@ -24,6 +24,9 @@
 
 body {
   font-family: 'Yantramanav', sans-serif;
+  color: white;
+  background-image: url("http://ak-hdl.buzzfed.com/static/2014-03/enhanced/webdr06/14/8/anigif_enhanced-31675-1394800389-3.gif");
+  background-size: cover;
 }
 
 /* WELCOME PAGE */
@@ -40,12 +43,15 @@ body {
   font-size: 1.5rem;
 }
 
-a {
-  text-decoration: none;
+#welcome-h > img {
+  max-width: 75%;
 }
 
-a:hover {
-  text-decoration: underline;  
+#welcome-h > button {
+  padding: 1rem;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-family: 'Yantramanav', sans-serif;
 }
 
 /* NEW POEM FORM */
