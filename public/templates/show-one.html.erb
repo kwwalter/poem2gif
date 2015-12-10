@@ -4,11 +4,14 @@
   <div ng-repeat="lines in showCtrl.onePoem.poem track by $index">
     <h4>Line {{$index + 1}}</h4>
     <div id="line-display">
-      <div id="word-display" ng-repeat="word in lines track by $index">
-        <!-- <div ng-repeat="pair in word track by $index"> -->
-          <!-- <div ng-repeat="(key, value) in pair track by $index"> -->
-            <!-- Link To GIF: {{linkToGIF}} -->
-            <!-- {{pair.key}} : {{pair.value}} -->
+      <div id="word-display" ng-repeat="(arrayIndex, wordData) in lines track by $index">
+        <!-- arrayIndex: wordData is: {{arrayIndex}}:{{wordData}} -->
+        <div ng-repeat="(newIndex, newValue) in wordData track by $index">
+          newIndex: newValue is: {{newIndex}}:{{newValue}}
+          <br><br>
+          newValue.linkToGIF: {{newValue: :linkToGIF}}
+          <!-- <div ng-repeat="(anotherIndex, anotherValue) in newValue track by $index"> -->
+            <!-- {{anotherIndex}}:{{anotherValue}} -->
             <div class="img-wrapper" ng-show="word.linkToGIF">
               <img class="gif" src="{{word.linkToGIF}}" alt="{{word.word}}">
               <p class="hover-text">{{word.word}}</p>
@@ -17,7 +20,7 @@
               <p>{{word.word}}</p>
             </div>
           <!-- </div> -->
-        <!-- </div> -->
+        </div>
       </div>
     </div>
   </div>
