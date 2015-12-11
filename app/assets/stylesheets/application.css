@@ -40,6 +40,7 @@ button:hover {
   color: #000;
   background: #fff;
   transition: 0.75s;
+  cursor: pointer;
 }
 
 #content {
@@ -54,14 +55,12 @@ button:hover {
   left: 0;
   background: black;
   margin-top: 1.5rem;
-  /*margin-bottom: 0;*/
-  /*padding: 1.5rem;*/
   width: 100%;
   height: 3.5rem;
 }
 
 #footer > a {
-  padding-top: 0.25rem; 
+  padding: 0.25rem;
 }
 
 #footer > span {
@@ -69,7 +68,6 @@ button:hover {
 }
 
 #footer-img {
-  /*position: absolute;*/
   width: 15rem;
   margin: 1.5rem auto;
   margin-top: 0.8rem;
@@ -78,9 +76,8 @@ button:hover {
 }
 
 .footer-icon {
-  /*position: absolute;*/
+  width: 3.5rem;
   margin: 0 auto;
-  margin-right: 1.5rem;
   float: right;
   padding-bottom: 1rem;
 }
