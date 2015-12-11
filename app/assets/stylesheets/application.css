@@ -23,41 +23,76 @@
 }
 
 body {
-  font-family: 'Yantramanav', sans-serif;
-  color: white;
-  /*background-color: black;*/
-  background-image: url("http://i.imgur.com/RuJYgPu.gif");
-  /*background-image: url("http://ak-hdl.buzzfed.com/static/2014-03/enhanced/webdr06/14/8/anigif_enhanced-31675-1394800389-3.gif");*/
+  /*font-family: 'Yantramanav', sans-serif;*/
+  font-family: 'Actor', 'Roboto', sans-serif;
+  color: #fff;
+  background-image: url("http://49.media.tumblr.com/e7077816ba6ed17c6431b4b96b6548cc/tumblr_n7dxq2jOWu1s9o5z2o1_500.gif");
   background-size: cover;
+  height: 100%;
+}
+
+button {
+  color: #fff;
+  background: #000;
+}
+
+button:hover {
+  color: #000;
+  background: #fff;
+  transition: 0.75s;
+}
+
+#content {
+  /* space to account for the footer */
+  padding-bottom: 3.5rem;
 }
 
 /* FOOTER */
 #footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: black;
   margin-top: 1.5rem;
+  /*margin-bottom: 0;*/
+  /*padding: 1.5rem;*/
+  width: 100%;
+  height: 3.5rem;
+}
+
+#footer > a {
+  padding-top: 0.25rem; 
+}
+
+#footer > span {
+  float:none;
 }
 
 #footer-img {
-  width: 10rem;
+  /*position: absolute;*/
+  width: 15rem;
   margin: 1.5rem auto;
-  /*display: inline;*/
+  margin-top: 0.8rem;
   float: left;
-
+  padding-bottom: 1rem;
 }
 
-.footer-icon1 {
-  width: 3rem;
+.footer-icon {
+  /*position: absolute;*/
+  margin: 0 auto;
+  margin-right: 1.5rem;
   float: right;
-}
-
-.footer-icon2 {
-  width: 2.75rem;
-  float: right;
+  padding-bottom: 1rem;
 }
 
 /* WELCOME PAGE */
 
 #welcome-h {
   text-align: center;
+}
+
+#logo {
+  font-family: 'Nobile', sans-serif;
 }
 
 #welcome-h > h1 {
