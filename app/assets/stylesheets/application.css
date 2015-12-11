@@ -25,8 +25,33 @@
 body {
   font-family: 'Yantramanav', sans-serif;
   color: white;
-  background-image: url("http://ak-hdl.buzzfed.com/static/2014-03/enhanced/webdr06/14/8/anigif_enhanced-31675-1394800389-3.gif");
+  /*background-color: black;*/
+  background-image: url("http://i.imgur.com/RuJYgPu.gif");
+  /*background-image: url("http://ak-hdl.buzzfed.com/static/2014-03/enhanced/webdr06/14/8/anigif_enhanced-31675-1394800389-3.gif");*/
   background-size: cover;
+}
+
+/* FOOTER */
+#footer {
+  margin-top: 1.5rem;
+}
+
+#footer-img {
+  width: 10rem;
+  margin: 1.5rem auto;
+  /*display: inline;*/
+  float: left;
+
+}
+
+.footer-icon1 {
+  width: 3rem;
+  float: right;
+}
+
+.footer-icon2 {
+  width: 2.75rem;
+  float: right;
 }
 
 /* WELCOME PAGE */
@@ -122,6 +147,7 @@ form > input, form > textarea {
   display: none;
   opacity: 0;
   text-align: center;
+  margin: 0;
   padding-top: 2rem;
   font-size: 2rem;
 }
@@ -147,6 +173,7 @@ form > input, form > textarea {
 }
 
 .no-gif > p {
+  margin: 0;
   padding-top: 3rem;
   font-size: 2rem;
 }

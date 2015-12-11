@@ -12,7 +12,7 @@ app.controller('MainController', ['$http', '$scope', 'poemService', '$location',
   controller.poems = poemService.getAll();
 
   // get a welcome page GIF..
-  $http.get('http://api.giphy.com/v1/gifs/search?q=writing&limit=100&api_key=dc6zaTOxFJmzC ')
+  $http.get('http://api.giphy.com/v1/gifs/search?q=poetry&limit=100&api_key=dc6zaTOxFJmzC ')
   .then(function(data){
     console.log('data from intro API call is: ', data);
 
@@ -26,7 +26,7 @@ app.controller('MainController', ['$http', '$scope', 'poemService', '$location',
 
       // if the URL is valid, assign the value.
       if (gifURL) {
-        controller.introGIFUrl = gifURL; 
+        controller.introGIFUrl = gifURL;
       }
     }
   }, function(error){
