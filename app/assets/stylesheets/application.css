@@ -196,7 +196,7 @@ form > input, form > textarea {
 
 #word-display {
   position: relative;
-  width: 100%:
+  width: 100%;
 }
 
 #word-display > img, #word-display > div, .img-wrapper {
