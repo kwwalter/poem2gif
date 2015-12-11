@@ -1,7 +1,10 @@
-<h2>Paste your poem in the field below (and give it a title!)</h2>
-<form id="poem-form" ng-submit="poemCtrl.convert()">
-  <input id="poem-title" type="text" placeholder="title" ng-model="poemCtrl.title"><br>
-  <input id="poem-author" type="text" placeholder="author" ng-model="poemCtrl.author"><br>
-  <textarea id="poem-body" placeholder="body" ng-model="poemCtrl.body"></textarea><br>
-  <input type="submit" value="submit">
-</form>
+<div id="create-new">
+  <h1>Paste your poem in the field below!</h1>
+  <h2>(and enter a title / your name if you like)</h2>
+  <form id="poem-form">
+    <input id="poem-title" type="text" placeholder="Title" ng-model="poemCtrl.title"><br>
+    <input id="poem-author" type="text" placeholder="Author Name" ng-model="poemCtrl.author"><br>
+    <textarea id="poem-body" placeholder="POEM" ng-model="poemCtrl.body"></textarea><br>
+    <button ng-click="poemCtrl.convert()">Submit</button>
+  </form>
+</div>

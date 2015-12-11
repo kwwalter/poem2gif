@@ -1,22 +1,26 @@
-<h2>Results</h2>
-<h3>{{resultsCtrl.poemData.title}}</h3>
-<h4>{{resultsCtrl.poemData.author}}</h4>
-<div id="poem-display">
-  <div ng-repeat="lines in resultsCtrl.poemArray track by $index">
-    <h4>Line {{$index + 1}}</h4>
-    <div id="line-display">
-      <div id="word-display" ng-repeat="word in lines track by $index">
-        <div class="img-wrapper" ng-show="word.linkToGIF">
-          <img class="gif" src="{{word.linkToGIF}}" alt="{{word.word}}">
-          <p class="hover-text">{{word.word}}</p>
-        </div>
-        <div class="no-gif" ng-show="!word.linkToGIF">
-          <p>{{word.word}}</p>
+<div id="results">
+  <h1>Results</h1>
+  <h2>{{resultsCtrl.poemData.title}}</h2>
+  <h3>{{resultsCtrl.poemData.author}}</h3>
+  <div id="poem-display">
+    <div ng-repeat="lines in resultsCtrl.poemArray track by $index">
+      <h2>Line {{$index + 1}}</h2>
+      <div id="line-display">
+        <div id="word-display" ng-repeat="word in lines track by $index">
+          <div class="img-wrapper" ng-show="word.linkToGIF">
+            <img class="gif" src="{{word.linkToGIF}}" alt="{{word.word}}">
+            <p class="hover-text">{{word.word}}</p>
+          </div>
+          <div class="no-gif" ng-show="!word.linkToGIF">
+            <p>{{word.word}}</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <h3>Go again?</h3>
+  <button ng-click="resultsCtrl.deleteForever()">You know it!</button>
+  <!-- <h3>Want to save this to the archive so other people can see it?</h3>
+  <button ng-click="resultsCtrl.saveGIFPoem(resultsCtrl.poemArray)">You bet!</button>
+  <button ng-click="resultsCtrl.deleteForever()">No way.</button> -->
 </div>
-<h3>Want to save this to the archive so other people can see it?</h3>
-<button ng-click="resultsCtrl.saveGIFPoem(resultsCtrl.poemArray)">You bet!</button>
-<button ng-click="resultsCtrl.deleteForever()">No way.</button>
