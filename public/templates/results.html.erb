@@ -5,7 +5,7 @@
   <h4>(make sure to scroll to the right if a line is especially long!)</h4>
   <div id="poem-display">
     <div ng-repeat="lines in resultsCtrl.poemArray track by $index">
-      <h2>Line {{$index + 1}}</h2>
+      <h2 id="line-h">Line {{$index + 1}}</h2>
       <div id="line-display">
         <div id="word-display" ng-repeat="word in lines track by $index">
           <div class="img-wrapper" ng-show="word.linkToGIF">
