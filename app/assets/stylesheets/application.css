@@ -64,7 +64,7 @@ button:hover {
 }
 
 #footer > a {
-  padding: 0.25rem;
+  padding: 0.15rem;
 }
 
 #footer > span {
@@ -81,9 +81,17 @@ button:hover {
 
 .footer-icon {
   width: 3.5rem;
-  margin: -0.1rem auto;
+  margin: 0 auto;
   float: right;
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+a > i {
+  color: #FFF;
+}
+
+a > i:hover {
+  color: darkgrey;
 }
 
 /* WELCOME PAGE */
