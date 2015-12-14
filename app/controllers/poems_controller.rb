@@ -13,9 +13,24 @@ class PoemsController < ApplicationController
   # GET /poems/1.json
   def show
     # @poem.to_json
-    # json = '{"id":"ABC","account_id":"123","first_name":"PEUS"}'
-    hash = JSON[@poem]
-    puts hash
+
+    # @poem.poem = JSON[@poem.poem]
+
+    # @poem.poem.each do |line|
+    #   line.to_json
+    # end
+
+    @poem.poem.each.with_index do |line, index|
+      # puts "#{index} and #{line}"
+      line.each_with_index do |word, line_index|
+        puts "#{line_index} and #{word}"
+        puts word[:linkToGIF]
+        puts word[:word]
+      end
+    end
+
+    # puts "after each, @poem.poem is now: "
+    # puts @poem.poem
   end
 
   # GET /poems/new
