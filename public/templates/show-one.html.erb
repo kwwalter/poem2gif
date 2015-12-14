@@ -1,8 +1,8 @@
 <!-- <div id="show-me"> -->
-  <h3>{{showCtrl.onePoem.poemObj.title}}</h3>
-  <h4>{{showCtrl.onePoem.poemObj.author}}</h4>
+  <h3>{{showCtrl.onePoem.title}}</h3>
+  <h4>{{showCtrl.onePoem.author}}</h4>
   <div id="poem-display">
-    <div ng-repeat="lines in showCtrl.onePoem.poemObj.poem track by $index">
+    <div ng-repeat="lines in showCtrl.onePoem.poem track by $index">
       <h4>Line {{$index + 1}}</h4>
       <div id="line-display">
         <div id="word-display" ng-repeat="(arrayIndex, wordData) in lines track by $index">

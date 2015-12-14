@@ -1,6 +1,8 @@
 class PoemsController < ApplicationController
   before_action :set_poem, only: [:show, :edit, :update, :destroy]
 
+  require 'json'
+
   # GET /poems
   # GET /poems.json
   def index
@@ -11,6 +13,9 @@ class PoemsController < ApplicationController
   # GET /poems/1.json
   def show
     # @poem.to_json
+    # json = '{"id":"ABC","account_id":"123","first_name":"PEUS"}'
+    hash = JSON[@poem]
+    puts hash
   end
 
   # GET /poems/new
