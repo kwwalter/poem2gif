@@ -1,3 +1,3 @@
 class Poem < ActiveRecord::Base
-  serialize :poem
+  # serialize :poem
 end

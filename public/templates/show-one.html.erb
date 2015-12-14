@@ -1,33 +1,27 @@
-<!-- <div id="show-me"> -->
-  <h3>{{showCtrl.onePoem.title}}</h3>
-  <h4>{{showCtrl.onePoem.author}}</h4>
-  <div id="poem-display">
-    <div ng-repeat="lines in showCtrl.onePoem.poem track by $index">
-      <h4>Line {{$index + 1}}</h4>
-      <div id="line-display">
-        <div id="word-display" ng-repeat="(arrayIndex, wordData) in lines track by $index">
-          <!-- {{arrayIndex}}:{{wordData}} -->
-          {{wordData[$index].word}}
-          {{wordData[$index].linkToGIF}}
-          {{wordData.word}}
-          {{wordData.linkToGIF}}
-          <!-- <div ng-repeat="(newIndex, newValue) in wordData track by $index">
-            newIndex: newValue is: {{newIndex}}:{{newValue}}
-            <br><br>
-            newValue.linkToGIF: {{newValue.linkToGIF}} -->
-            <!-- <div ng-repeat="(anotherIndex, anotherValue) in newValue track by $index"> -->
-              <!-- {{anotherIndex}}:{{anotherValue}} -->
-              <div class="img-wrapper" ng-show="word.linkToGIF">
-                <img class="gif" src="{{word.linkToGIF}}" alt="{{word.word}}">
-                <p class="hover-text">{{word.word}}</p>
-              </div>
-              <div class="no-gif" ng-show="!word.linkToGIF">
-                <p>{{word.word}}</p>
-              </div>
-            <!-- </div> -->
-          <!-- </div> -->
+<h3>{{showCtrl.onePoem.title}}</h3>
+<h4>{{showCtrl.onePoem.author}}</h4>
+<div id="poem-display">
+  <div ng-repeat="lines in showCtrl.onePoem.poem track by $index">
+    <h4>Line {{$index + 1}}</h4>
+    <div id="line-display">
+      <div id="word-display" ng-repeat="(arrayIndex, wordData) in lines track by $index">
+        <!-- {{arrayIndex}}:{{wordData}} -->
+        <div ng-repeat="(newIndex, newValue) in wordData track by $index">
+          newIndex: newValue is: {{newIndex}}:{{newValue}}
+          <br><br>
+          newValue.linkToGIF: {{newValue.linkToGIF}}
+          <div ng-repeat="(anotherIndex, anotherValue) in newValue track by $index">
+            anotherIndex:anotherValue is: {{anotherIndex}}:{{anotherValue}}
+            <div class="img-wrapper" ng-show="word.linkToGIF">
+              <img class="gif" src="{{word.linkToGIF}}" alt="{{word.word}}">
+              <p class="hover-text">{{word.word}}</p>
+            </div>
+            <div class="no-gif" ng-show="!word.linkToGIF">
+              <p>{{word.word}}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-<!-- </div> end of show-me -->
+</div>

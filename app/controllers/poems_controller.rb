@@ -12,7 +12,7 @@ class PoemsController < ApplicationController
   # GET /poems/1
   # GET /poems/1.json
   def show
-    puts @poem
+    puts @poem.poem
     # @poem.to_json
 
     # @poem.poem = JSON[@poem.poem]
