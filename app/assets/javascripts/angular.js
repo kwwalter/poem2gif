@@ -44,8 +44,20 @@ app.controller('ShowController', ['$http', '$scope', 'poemService', '$location',
     // console.log("controller.onePoem is now: ", controller.onePoem);
     $http.get('/poems/' + $routeParams.id).then(function(data){
       console.log("data from getOnePoem is: ", data);
-      controller.onePoem = data.data;
-      console.log("controller.onePoem is now: ", controller.onePoem);
+
+      // trying json.stringify and json.parse.. no luck
+      // controller.onePoem = data.data;
+      // controller.onePoem.poemObj.poem.forEach(function(subarray1) {
+      //   subarray1.forEach(function(wordEntry1){
+      //     console.log("wordEntry1 is now: ", wordEntry1);
+      //     wordEntry1 = JSON.stringify(wordEntry1);
+      //     wordEntry1 = JSON.parse(wordEntry1);
+      //   });
+      // });
+      // console.log("after foreach, controller.onePoem is now: ", controller.onePoem);
+
+      // controller.onePoem = data.data;
+      // console.log("controller.onePoem is now: ", controller.onePoem);
     }, function(error){
       console.log("there was an error: ", error);
     });
