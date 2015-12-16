@@ -181,9 +181,11 @@ app.controller('ResultsController', ['$http', '$scope', 'poemService', '$locatio
     $http.post('/poems', {
       //include authenticity_token
       authenticity_token: authenticity_token,
-      title: controller.title || "untitled",
-      author: controller.author || "anonymous",
-      poem: poemArray
+      poem: {
+        title: controller.title || "untitled",
+        author: controller.author || "anonymous",
+        poem: poemArray
+      }
     }).then(function(data){
       console.log("success! data from saveGIFPoem() is: ", data);
       $location.path('/all')
@@ -307,27 +309,27 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 
   $routeProvider.
   when('/', {
-    templateUrl: 'templates/welcome.html.erb',
+    templateUrl: 'templates/welcome.html',
     controller: 'MainController',
     controllerAs: 'mainCtrl'
   }).
   when('/all', {
-    templateUrl: 'templates/all.html.erb',
+    templateUrl: 'templates/all.html',
     controller: 'MainController',
     controllerAs: 'mainCtrl'
   }).
   when('/poem/:id', {
-    templateUrl: 'templates/show-one.html.erb',
+    templateUrl: 'templates/show-one.html',
     controller: 'ShowController',
     controllerAs: 'showCtrl'
   }).
   when('/new', {
-    templateUrl: 'templates/new.html.erb',
+    templateUrl: 'templates/new.html',
     controller: 'PoemController',
     controllerAs: 'poemCtrl'
   }).
   when('/results', {
-    templateUrl: 'templates/results.html.erb',
+    templateUrl: 'templates/results.html',
     controller: 'ResultsController',
     controllerAs: 'resultsCtrl'
   }).
