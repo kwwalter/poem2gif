@@ -4,7 +4,7 @@ json.poemObj do
   json.id @poem.id
   json.title @poem.title
   json.author @poem.author
-  
+
   json.poem @poem.poem
 
   # json.array! @poem.poem do |line|

@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   get 'poems/:id' => 'poems#show', defaults: { format: :json }
 
+  post 'poems' => 'poems#create'
+
   # root 'welcome#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

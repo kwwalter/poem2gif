@@ -178,13 +178,18 @@ app.controller('ResultsController', ['$http', '$scope', 'poemService', '$locatio
   this.saveGIFPoem = function(poemArray){
     console.log("poemArray in saveGIFPoem is: ", poemArray);
 
+    var convertedPoemArray = {}; // needs more object
+    for (var i = 0; i < poemArray.length; i++) {
+      convertedPoemArray[i] = poemArray[i]
+    };
+
     $http.post('/poems', {
       //include authenticity_token
       authenticity_token: authenticity_token,
       poem: {
-        title: controller.title || "untitled",
-        author: controller.author || "anonymous",
-        poem: poemArray
+        title: controller.poemData.title || "untitled",
+        author: controller.poemData.author || "anonymous",
+        poem: convertedPoemArray
       }
     }).then(function(data){
       console.log("success! data from saveGIFPoem() is: ", data);
