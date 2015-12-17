@@ -1,11 +1,11 @@
-# json.extract! @poem, :id, :title, :author, :poem, :created_at, :updated_at
+# json.extract! @poem, :id, :title, :author, :poemContent, :created_at, :updated_at
 
 json.poemObj do
   json.id @poem.id
   json.title @poem.title
   json.author @poem.author
 
-  json.poemContent @poem.poem
+  json.poemContent @poem.poemContent
 
   # json.array! @poem.poem do |line|
   #   json.array! line do |wordData|

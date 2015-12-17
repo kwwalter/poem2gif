@@ -14,7 +14,7 @@ app.controller('MainController', ['$http', '$scope', 'poemService', '$location',
   // get a welcome page GIF..
   $http.get('http://api.giphy.com/v1/gifs/search?q=poetry&limit=100&api_key=dc6zaTOxFJmzC ')
   .then(function(data){
-    console.log('data from intro API call is: ', data);
+    // console.log('data from intro API call is: ', data);
 
     // conditional to ensure that data.data.data.length > 0
     if (data.data.data.length > 0) {
@@ -148,12 +148,6 @@ app.controller('PoemController', ['$http', '$scope', 'poemService', '$location',
 
     // console.log("at the end of convert(), linesArray is now: ", linesArray);
 
-    // trying this..
-    // var stringified = JSON.stringify(linesArray);
-    setTimeout(function(){
-      poemService.setStringifiedPoemArray(linesArray);
-    }, 15000);
-
     // store the updated array in the service
     poemService.setPoemArray(linesArray);
 
@@ -177,33 +171,34 @@ app.controller('ResultsController', ['$http', '$scope', 'poemService', '$locatio
   controller.poemArray = poemService.getPoemArray();
   controller.poemData = poemService.getPoemData();
 
-  // should be false when the controller is instantiated, but will be switched to true after all of the Giphy API calls have been made (set timeout for 15s)
-  controller.showSaveButton = false;
-
-  setTimeout(function(){
-    $('#results-buttons').append('<button ng-show="resultsCtrl.showSaveButton" ng-click="resultsCtrl.saveGIFPoem(resultsCtrl.poemArray)">YES PLEASE</button>');
-  }, 15000);
+  // setTimeout(function(){
+  //   $('#results-buttons').append('<button ng-click="resultsCtrl.saveGIFPoem(resultsCtrl.poemArray)">YES PLEASE</button>');
+  // }, 5000);
 
   console.log("in ResultsController, poemArray is: ", controller.poemArray);
 
   // NOTE: might have to remove any blank entries (usually from periods at end of line) otherwise there'll be an error because multidimensional arrays must have subarrays of equal length
 
   this.saveGIFPoem = function(poemArray){
+    alert('working!');
+
     console.log("poemArray in saveGIFPoem is: ", poemArray);
 
-    var convertedPoemArray = {}; // needs more object
-    for (var i = 0; i < poemArray.length; i++) {
-      convertedPoemArray[i] = poemArray[i]
-    };
+    var stringified = poemService.stringifyPoemArray(poemArray);
+
+    console.log("stringified poem array in saveGIFPoem is: ", stringified);
+
+    // var convertedPoemArray = {}; // needs more object
+    // for (var i = 0; i < poemArray.length; i++) {
+    //   convertedPoemArray[i] = poemArray[i]
+    // };
 
     $http.post('/poems', {
       //include authenticity_token
       authenticity_token: authenticity_token,
-      poem: {
-        title: controller.poemData.title || "untitled",
-        author: controller.poemData.author || "anonymous",
-        poem: convertedPoemArray
-      }
+      title: controller.poemData.title || "untitled",
+      author: controller.poemData.author || "anonymous",
+      poemContent: stringified
     }).then(function(data){
       console.log("success! data from saveGIFPoem() is: ", data);
       $location.path('/all')
@@ -240,23 +235,27 @@ app.service('poemService', ['$http', '$routeParams', function($http, $routeParam
     return serviceThis.poemArray;
   };
 
-  this.setStringifiedPoemArray = function(to_stringy) {
+  this.stringifyPoemArray = function(to_stringy) {
     serviceThis.stringified = JSON.stringify(to_stringy);
-    // console.log("in setStringifiedPoemArray(), stringified is now: ", serviceThis.stringified);
+
+    return serviceThis.stringified;
+    console.log("in setStringifiedPoemArray(), stringified is now: ", serviceThis.stringified);
     // console.log("and the parsed version: ", JSON.parse(serviceThis.stringified));
   };
 
-  this.getStringifiedPoemArray = function() {
-    return serviceThis.stringified;
-  };
+  // this.getStringifiedPoemArray = function() {
+  //   return serviceThis.stringified;
+  // };
 
-  this.setParsedPoemArray = function(to_parse) {
+  this.parsePoemArray = function(to_parse) {
     serviceThis.parsed = JSON.parse(to_parse);
-  };
 
-  this.getParsedPoemArray = function() {
     return serviceThis.parsed;
   };
+
+  // this.getParsedPoemArray = function() {
+  //   return serviceThis.parsed;
+  // };
 
   this.setPoemData = function(poem) {
     serviceThis.poemData = {
