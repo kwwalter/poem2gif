@@ -7,11 +7,11 @@ app.controller('MainController', ['$http', '$scope', 'poemService', '$location',
   this.redirect = function(whereTo) {
     $location.path('/' + whereTo);
   };
-
-  // load up all the current poems on controller instantiation
-  this.loadPoems = function() {
-    controller.poems = poemService.getAll();
-  };
+  //
+  // // load up all the current poems on controller instantiation
+  // this.loadPoems = function() {
+  //   controller.poems = poemService.getAll();
+  // };
 
   // get a welcome page GIF..
   $http.get('http://api.giphy.com/v1/gifs/search?q=poetry&limit=100&api_key=dc6zaTOxFJmzC ')
@@ -34,9 +34,22 @@ app.controller('MainController', ['$http', '$scope', 'poemService', '$location',
   }, function(error){
     console.log("error during API call: ", error);
   });
+  // 
+  // // run it on controller instantiation
+  // this.loadPoems();
+}]);
+
+app.controller('AllController', ['$http', '$scope', 'poemService', '$location', function($http, $scope, poemService, $location){
+
+  var controller = this;
+
+  // load up all the current poems on controller instantiation
+  // this.loadPoems = function() {
+    controller.poems = poemService.getAll();
+  // };
 
   // run it on controller instantiation
-  this.loadPoems();
+  // this.loadPoems();
 }]);
 
 app.controller('ShowController', ['$http', '$scope', 'poemService', '$location', '$routeParams', function($http, $scope, poemService, $location, $routeParams){
@@ -60,6 +73,10 @@ app.controller('ShowController', ['$http', '$scope', 'poemService', '$location',
     }, function(error){
       console.log("there was an error: ", error);
     });
+  };
+
+  this.redirect = function(whereTo) {
+    $location.path('/' + whereTo);
   };
 
   // run on controller instantiation
@@ -179,7 +196,7 @@ app.controller('ResultsController', ['$http', '$scope', 'poemService', '$locatio
   // NOTE: might have to remove any blank entries (usually from periods at end of line) otherwise there'll be an error because multidimensional arrays must have subarrays of equal length
 
   this.saveGIFPoem = function(poemArray){
-    console.log("poemArray in saveGIFPoem is: ", poemArray);
+    // console.log("poemArray in saveGIFPoem is: ", poemArray);
 
     var stringified = poemService.stringifyPoemArray(poemArray);
 
@@ -193,6 +210,8 @@ app.controller('ResultsController', ['$http', '$scope', 'poemService', '$locatio
       poemContent: stringified
     }).then(function(data){
       console.log("success! data from saveGIFPoem() is: ", data);
+
+      // then redirect
       $location.path('/all')
     }, function(error){
       console.log("there was an error: ", error);
@@ -333,8 +352,8 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   }).
   when('/all', {
     templateUrl: 'templates/all.html',
-    controller: 'MainController',
-    controllerAs: 'mainCtrl'
+    controller: 'AllController',
+    controllerAs: 'allCtrl'
   }).
   when('/poem/:id', {
     templateUrl: 'templates/show-one.html',

@@ -23,8 +23,7 @@
 }
 
 body {
-  /*font-family: 'Yantramanav', sans-serif;*/
-  font-family: 'Actor', 'Roboto', sans-serif;
+  font-family: 'Actor', sans-serif;
   color: #fff;
   background-image: url("http://49.media.tumblr.com/e7077816ba6ed17c6431b4b96b6548cc/tumblr_n7dxq2jOWu1s9o5z2o1_500.gif");
   background-size: cover;
@@ -43,7 +42,7 @@ button {
 button:hover {
   color: #000;
   background: #fff;
-  transition: 0.75s;
+  transition: 0.25s;
   cursor: pointer;
 }
 
@@ -204,10 +203,6 @@ form > input, form > textarea {
 #poem-display > div {
   margin: 0.5rem;
 }
-/*
-#poem-display > h4 {
-  font-size: 1.25rem;
-}*/
 
 #line-display {
   display: flex;
@@ -272,8 +267,46 @@ form > input, form > textarea {
   font-size: 2rem;
 }
 
-/*#show-me {
-  background: white;
+/* ALL SAVED POEMS PAGE */
+
+#all > h1 {
+  font-size: 4rem;
+  text-align: center;
+  padding-bottom: 2rem;
+}
+
+#all-h2 {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+#all-h2 > a {
+  text-decoration: none;
+  color: white;
+}
+
+#all-h2 > a:visited {
+  color: white;
+}
+
+#all-h2 > a:hover {
+  background: rgba(255, 119, 255, 1);;
   color: black;
-  height: 500rem;
-}*/
+}
+
+/* SINGLE POEM DISPLAY */
+
+#show-buttons {
+  margin: 0.5rem auto;
+  display: table;
+}
+
+#show-one > h1 {
+  font-size: 4rem;
+  text-align: center;
+}
+
+#show-one > h2 {
+  font-size: 2rem;
+  text-align: center;
+}

@@ -1,6 +1,8 @@
-<h1>All Saved GIFPoems/PoemGIFs/GIFOEMS</h1>
-<ul>
-  <li ng-repeat="poem in mainCtrl.poems">
-    <a href="/poem/{{poem.id}}">{{poem.title}}, by {{poem.author}}</a>
-  </li>
-</ul>
+<div id="all">
+  <h1>All Saved GIFPoems!</h1>
+  <ul>
+    <li ng-repeat="poem in allCtrl.poems">
+      <h2 id="all-h2"><a href="/poem/{{poem.id}}">{{poem.title}}, by {{poem.author}}</a></h2>
+    </li>
+  </ul>
+</div>

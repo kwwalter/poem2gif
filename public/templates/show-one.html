@@ -1,18 +1,24 @@
-<h3>{{showCtrl.poem.title}}</h3>
-<h4>{{showCtrl.poem.author}}</h4>
-<div id="poem-display">
-  <div ng-repeat="lines in showCtrl.poem.poemContent track by $index">
-    <h4>Line {{$index + 1}}</h4>
-    <div id="line-display">
-      <div id="word-display" ng-repeat="word in lines track by $index">
-        <div class="img-wrapper" ng-show="word.linkToGIF">
-          <img class="gif" src="{{word.linkToGIF}}" alt="{{word.word}}">
-          <p class="hover-text">{{word.word}}</p>
-        </div>
-        <div class="no-gif" ng-show="!word.linkToGIF">
-          <p>{{word.word}}</p>
+<div id="show-one">
+  <h1>{{showCtrl.poem.title}}</h1>
+  <h2>{{showCtrl.poem.author}}</h2>
+  <div id="poem-display">
+    <div ng-repeat="lines in showCtrl.poem.poemContent track by $index">
+      <h4>Line {{$index + 1}}</h4>
+      <div id="line-display">
+        <div id="word-display" ng-repeat="word in lines track by $index">
+          <div class="img-wrapper" ng-show="word.linkToGIF">
+            <img class="gif" src="{{word.linkToGIF}}" alt="{{word.word}}">
+            <p class="hover-text">{{word.word}}</p>
+          </div>
+          <div class="no-gif" ng-show="!word.linkToGIF">
+            <p>{{word.word}}</p>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+  <div id="show-buttons">
+    <button ng-click="showCtrl.redirect('new')">Make a new poem!</button>
+    <button ng-click="showCtrl.redirect('all')">Back to list of saved poems</button>
   </div>
 </div>
