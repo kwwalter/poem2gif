@@ -42,8 +42,16 @@ app.controller('ShowController', ['$http', '$scope', 'poemService', '$location',
   this.getOnePoem = function(){
     // controller.onePoem = poemService.getOnePoem();
     // console.log("controller.onePoem is now: ", controller.onePoem);
-    $http.get('/poems/' + $routeParams.id).then(function(data){
-      console.log("data from getOnePoem is: ", data);
+    $http.get('/poems/' + $routeParams.id).then(function(res){
+      // console.log("data from getOnePoem is: ", res);
+
+      poem = res.data.poemObj;
+      poem.poemContent = poemService.parsePoemArray(poem.poemContent);
+
+      // console.log("poem is: ", poem);
+
+      controller.poem = poem;
+      console.log("controller.poem is: ", controller.poem);
 
       // trying json.stringify and json.parse.. no luck
       // controller.onePoem = data.data;
@@ -217,9 +225,15 @@ app.service('poemService', ['$http', '$routeParams', function($http, $routeParam
   var serviceThis = this;
 
   this.getAll = function() {
-    $http.get('/poems').then(function(data){
-      // console.log("data from getAll call is: ", data);
-      serviceThis.poems = data.data;
+    $http.get('/poems').then(function(res){
+      console.log("data from getAll call is: ", res);
+
+      // iterate through the data, parse all of the poemContent strings--but only need to do this once an individual poem is accessed
+      // poems.forEach(function(item){
+      //   item.poemContent = serviceThis.parsePoemArray(item.poemContent);
+      // });
+
+      serviceThis.poems = res.data.poems;
     }, function(error){
       console.log("there was an error: ", error);
     });
