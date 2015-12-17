@@ -13,26 +13,6 @@ class PoemsController < ApplicationController
   # GET /poems/1.json
   def show
     # puts @poem.poemContent
-    
-    # @poem.to_json
-
-    # @poem.poem = JSON[@poem.poem]
-
-    # @poem.poem.each do |line|
-    #   line.to_json
-    # end
-
-    # @poem.poem.each.with_index do |line, index|
-    #   # puts "#{index} and #{line}"
-    #   line.each_with_index do |word, line_index|
-    #     puts "#{line_index} and #{word}"
-    #     puts word[:linkToGIF]
-    #     puts word[:word]
-    #   end
-    # end
-
-    # puts "after each, @poem.poem is now: "
-    # puts @poem.poem
   end
 
   # GET /poems/new
@@ -47,17 +27,7 @@ class PoemsController < ApplicationController
   # POST /poems
   # POST /poems.json
   def create
-    puts "poem params:"
-    puts poem_params
-
-    # fail
-
     @poem = Poem.new(poem_params)
-
-    puts "@poem:"
-    puts @poem
-
-    # render json: @poem
 
     respond_to do |format|
 
@@ -103,9 +73,6 @@ class PoemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def poem_params
-      # params.require(:poem).permit(:title, :author, poem: { '0' => [] })
       params.require(:poem).permit(:title, :author, :poemContent)
     end
 end
-
-# poem => { 'lineNumber' => [WordCombos]}

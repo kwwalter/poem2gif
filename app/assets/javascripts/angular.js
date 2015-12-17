@@ -9,7 +9,9 @@ app.controller('MainController', ['$http', '$scope', 'poemService', '$location',
   };
 
   // load up all the current poems on controller instantiation
-  controller.poems = poemService.getAll();
+  this.loadPoems = function() {
+    controller.poems = poemService.getAll();
+  };
 
   // get a welcome page GIF..
   $http.get('http://api.giphy.com/v1/gifs/search?q=poetry&limit=100&api_key=dc6zaTOxFJmzC ')
@@ -32,6 +34,9 @@ app.controller('MainController', ['$http', '$scope', 'poemService', '$location',
   }, function(error){
     console.log("error during API call: ", error);
   });
+
+  // run it on controller instantiation
+  this.loadPoems();
 }]);
 
 app.controller('ShowController', ['$http', '$scope', 'poemService', '$location', '$routeParams', function($http, $scope, poemService, $location, $routeParams){
@@ -52,20 +57,6 @@ app.controller('ShowController', ['$http', '$scope', 'poemService', '$location',
 
       controller.poem = poem;
       console.log("controller.poem is: ", controller.poem);
-
-      // trying json.stringify and json.parse.. no luck
-      // controller.onePoem = data.data;
-      // controller.onePoem.poemObj.poem.forEach(function(subarray1) {
-      //   subarray1.forEach(function(wordEntry1){
-      //     console.log("wordEntry1 is now: ", wordEntry1);
-      //     wordEntry1 = JSON.stringify(wordEntry1);
-      //     wordEntry1 = JSON.parse(wordEntry1);
-      //   });
-      // });
-      // console.log("after foreach, controller.onePoem is now: ", controller.onePoem);
-
-      // controller.onePoem = data.data;
-      // console.log("controller.onePoem is now: ", controller.onePoem);
     }, function(error){
       console.log("there was an error: ", error);
     });
@@ -188,18 +179,11 @@ app.controller('ResultsController', ['$http', '$scope', 'poemService', '$locatio
   // NOTE: might have to remove any blank entries (usually from periods at end of line) otherwise there'll be an error because multidimensional arrays must have subarrays of equal length
 
   this.saveGIFPoem = function(poemArray){
-    alert('working!');
-
     console.log("poemArray in saveGIFPoem is: ", poemArray);
 
     var stringified = poemService.stringifyPoemArray(poemArray);
 
     console.log("stringified poem array in saveGIFPoem is: ", stringified);
-
-    // var convertedPoemArray = {}; // needs more object
-    // for (var i = 0; i < poemArray.length; i++) {
-    //   convertedPoemArray[i] = poemArray[i]
-    // };
 
     $http.post('/poems', {
       //include authenticity_token
@@ -227,12 +211,6 @@ app.service('poemService', ['$http', '$routeParams', function($http, $routeParam
   this.getAll = function() {
     $http.get('/poems').then(function(res){
       console.log("data from getAll call is: ", res);
-
-      // iterate through the data, parse all of the poemContent strings--but only need to do this once an individual poem is accessed
-      // poems.forEach(function(item){
-      //   item.poemContent = serviceThis.parsePoemArray(item.poemContent);
-      // });
-
       serviceThis.poems = res.data.poems;
     }, function(error){
       console.log("there was an error: ", error);
@@ -253,23 +231,14 @@ app.service('poemService', ['$http', '$routeParams', function($http, $routeParam
     serviceThis.stringified = JSON.stringify(to_stringy);
 
     return serviceThis.stringified;
-    console.log("in setStringifiedPoemArray(), stringified is now: ", serviceThis.stringified);
-    // console.log("and the parsed version: ", JSON.parse(serviceThis.stringified));
+    // console.log("in setStringifiedPoemArray(), stringified is now: ", serviceThis.stringified);
   };
-
-  // this.getStringifiedPoemArray = function() {
-  //   return serviceThis.stringified;
-  // };
 
   this.parsePoemArray = function(to_parse) {
     serviceThis.parsed = JSON.parse(to_parse);
 
     return serviceThis.parsed;
   };
-
-  // this.getParsedPoemArray = function() {
-  //   return serviceThis.parsed;
-  // };
 
   this.setPoemData = function(poem) {
     serviceThis.poemData = {
