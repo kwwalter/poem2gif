@@ -7,11 +7,6 @@ app.controller('MainController', ['$http', '$scope', 'poemService', '$location',
   this.redirect = function(whereTo) {
     $location.path('/' + whereTo);
   };
-  //
-  // // load up all the current poems on controller instantiation
-  // this.loadPoems = function() {
-  //   controller.poems = poemService.getAll();
-  // };
 
   // get a welcome page GIF..
   $http.get('http://api.giphy.com/v1/gifs/search?q=poetry&limit=100&api_key=dc6zaTOxFJmzC ')
@@ -34,22 +29,23 @@ app.controller('MainController', ['$http', '$scope', 'poemService', '$location',
   }, function(error){
     console.log("error during API call: ", error);
   });
-  // 
-  // // run it on controller instantiation
-  // this.loadPoems();
 }]);
 
 app.controller('AllController', ['$http', '$scope', 'poemService', '$location', function($http, $scope, poemService, $location){
 
   var controller = this;
 
-  // load up all the current poems on controller instantiation
-  // this.loadPoems = function() {
-    controller.poems = poemService.getAll();
-  // };
+  this.redirect = function(whereTo) {
+    $location.path('/' + whereTo);
+  };
 
-  // run it on controller instantiation
-  // this.loadPoems();
+  // tried doing this through the service, but not loading correctly.
+  $http.get('/poems').then(function(res){
+    // console.log("data from get /poems call is: ", res);
+    controller.poems = res.data.poems;
+  }, function(error){
+    console.log("there was an error: ", error);
+  });
 }]);
 
 app.controller('ShowController', ['$http', '$scope', 'poemService', '$location', '$routeParams', function($http, $scope, poemService, $location, $routeParams){
@@ -226,17 +222,6 @@ app.controller('ResultsController', ['$http', '$scope', 'poemService', '$locatio
 
 app.service('poemService', ['$http', '$routeParams', function($http, $routeParams){
   var serviceThis = this;
-
-  this.getAll = function() {
-    $http.get('/poems').then(function(res){
-      console.log("data from getAll call is: ", res);
-      serviceThis.poems = res.data.poems;
-    }, function(error){
-      console.log("there was an error: ", error);
-    });
-
-    return serviceThis.poems;
-  };
 
   this.setPoemArray = function(poemArray) {
     serviceThis.poemArray = poemArray;

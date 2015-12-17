@@ -294,6 +294,11 @@ form > input, form > textarea {
   color: black;
 }
 
+#all > button {
+  display: block; 
+  margin: 0.5rem auto;
+}
+
 /* SINGLE POEM DISPLAY */
 
 #show-buttons {
