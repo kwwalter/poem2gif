@@ -148,6 +148,12 @@ app.controller('PoemController', ['$http', '$scope', 'poemService', '$location',
 
     // console.log("at the end of convert(), linesArray is now: ", linesArray);
 
+    // trying this..
+    // var stringified = JSON.stringify(linesArray);
+    setTimeout(function(){
+      poemService.setStringifiedPoemArray(linesArray);
+    }, 15000);
+
     // store the updated array in the service
     poemService.setPoemArray(linesArray);
 
@@ -170,6 +176,13 @@ app.controller('ResultsController', ['$http', '$scope', 'poemService', '$locatio
 
   controller.poemArray = poemService.getPoemArray();
   controller.poemData = poemService.getPoemData();
+
+  // should be false when the controller is instantiated, but will be switched to true after all of the Giphy API calls have been made (set timeout for 15s)
+  controller.showSaveButton = false;
+
+  setTimeout(function(){
+    $('#results-buttons').append('<button ng-show="resultsCtrl.showSaveButton" ng-click="resultsCtrl.saveGIFPoem(resultsCtrl.poemArray)">YES PLEASE</button>');
+  }, 15000);
 
   console.log("in ResultsController, poemArray is: ", controller.poemArray);
 
@@ -225,6 +238,24 @@ app.service('poemService', ['$http', '$routeParams', function($http, $routeParam
 
   this.getPoemArray = function() {
     return serviceThis.poemArray;
+  };
+
+  this.setStringifiedPoemArray = function(to_stringy) {
+    serviceThis.stringified = JSON.stringify(to_stringy);
+    // console.log("in setStringifiedPoemArray(), stringified is now: ", serviceThis.stringified);
+    // console.log("and the parsed version: ", JSON.parse(serviceThis.stringified));
+  };
+
+  this.getStringifiedPoemArray = function() {
+    return serviceThis.stringified;
+  };
+
+  this.setParsedPoemArray = function(to_parse) {
+    serviceThis.parsed = JSON.parse(to_parse);
+  };
+
+  this.getParsedPoemArray = function() {
+    return serviceThis.parsed;
   };
 
   this.setPoemData = function(poem) {

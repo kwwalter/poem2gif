@@ -46,12 +46,14 @@ class PoemsController < ApplicationController
   # POST /poems
   # POST /poems.json
   def create
+    puts "poem params:"
     puts poem_params
 
     # fail
 
     @poem = Poem.new(poem_params)
 
+    puts "@poem:"
     puts @poem
 
     # render json: @poem
@@ -100,7 +102,8 @@ class PoemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def poem_params
-      params.require(:poem).permit(:title, :author, poem: { '0' => [] })
+      # params.require(:poem).permit(:title, :author, poem: { '0' => [] })
+      params.require(:poem).permit(:title, :author, :poemContent)
     end
 end
 
